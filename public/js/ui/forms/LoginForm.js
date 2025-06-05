@@ -20,7 +20,7 @@ class LoginForm extends AsyncForm {
           modal.close();
         }
       } else {
-        console.error("Ошибка регистрации:", err);
+        console.error("Ошибка входа:", response.error);
       }
     });
   }
