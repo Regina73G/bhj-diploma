@@ -18,6 +18,8 @@ class CreateAccountForm extends AsyncForm {
           const modal = new Modal(modalElement);
           modal.close();
         }
+      } else {
+        console.error("Ошибка создания счета:", response.error);
       }
     });
   }
