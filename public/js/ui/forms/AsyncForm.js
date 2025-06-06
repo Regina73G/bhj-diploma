@@ -14,7 +14,7 @@ class AsyncForm {
    * */
   constructor(element) {
     if(!element) {
-      throw new Error("Не передан элемент в конструктор Modal");
+      throw new Error("Не передан элемент в конструктор AsyncForm");
     }
     this.element = element;
     this.registerEvents();
