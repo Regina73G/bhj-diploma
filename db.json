@@ -30,14 +30,9 @@
       "id": "3"
     },
     {
-      "name": "Комп",
-      "user_id": "1hl4l2kwmbksdf1b",
-      "id": "1hl4lcw8mbkwntzs"
-    },
-    {
       "name": "ЗП",
       "user_id": "1hl4l2kwmbksdf1b",
-      "id": "1hl4lb18mbkwopdn"
+      "id": "1hl4l7o0mbqcohti"
     }
   ],
   "transactions": [
@@ -177,49 +172,22 @@
       "user_id": "1"
     },
     {
-      "id": "1hl4l4g0mbkwngw0",
-      "type": "income",
-      "name": "На 2 недели",
-      "sum": 10000,
-      "account_id": "1hl4l8agmbkwferz",
-      "user_id": "1hl4l2kwmbksdf1b",
-      "created_at": "2025-06-06T14:33:02.015Z"
-    },
-    {
-      "id": "1hl4ldpkmbkwo460",
-      "type": "income",
-      "name": "1",
-      "sum": 50000,
-      "account_id": "1hl4lcw8mbkwntzs",
-      "user_id": "1hl4l2kwmbksdf1b",
-      "created_at": "2025-06-06T14:33:32.183Z"
-    },
-    {
-      "id": "1hl4lay4mbkwp8c6",
+      "id": "1hl4l498mbqcqox6",
       "type": "income",
       "name": "Аванс",
-      "sum": 45000,
-      "account_id": "1hl4lb18mbkwopdn",
+      "sum": 40000,
+      "account_id": "1hl4l7o0mbqcohti",
       "user_id": "1hl4l2kwmbksdf1b",
-      "created_at": "2025-06-06T14:34:24.245Z"
+      "created_at": "2025-06-10T10:02:17.129Z"
     },
     {
-      "id": "1hl4la8ombkwppej",
-      "type": "income",
-      "name": "Зарплата",
-      "sum": 47000,
-      "account_id": "1hl4lb18mbkwopdn",
-      "user_id": "1hl4l2kwmbksdf1b",
-      "created_at": "2025-06-06T14:34:46.362Z"
-    },
-    {
-      "id": "1hl4l3d4mbkwqbbx",
+      "id": "1hl4l984mbqcrsyi",
       "type": "expense",
-      "name": "Подарки",
-      "sum": 5000,
-      "account_id": "1hl4lb18mbkwopdn",
+      "name": "Праздники",
+      "sum": 10000,
+      "account_id": "1hl4l7o0mbqcohti",
       "user_id": "1hl4l2kwmbksdf1b",
-      "created_at": "2025-06-06T14:35:14.780Z"
+      "created_at": "2025-06-10T10:03:09.017Z"
     }
   ]
 }

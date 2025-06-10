@@ -59,16 +59,22 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
+    if (!this.lastOptions) {
+      return;
+    }
+
     const confirmation = confirm("Вы действительно хотите удалить счёт?");
     if (!confirmation) {
       return
     }
-
-    this.clear;
     
-    Account.remove(null, (err, response) => {
+    Account.remove({id: this.lastOptions.account_id}, (err, response) => {
       if (response.success === true) {
-        App.update();
+        this.clear();
+        App.updateWidgets();
+        App.updateForms();
+      } else {
+        console.error(err);
       }
     });
   }
@@ -84,10 +90,13 @@ class TransactionsPage {
     if (!confirmation) {
       return
     }
+    console.log(id); // ПРОВЕРКА
 
     Transaction.remove({id: id}, (err, response) => {
       if (response.success === true) {
         App.update();
+      } else {
+        console.error(err);
       }
     });
   }
@@ -105,18 +114,19 @@ class TransactionsPage {
 
     this.lastOptions = options;
 
-    Account.get(options, (err, response) => {
+    Account.get(options.account_id, (err, response) => {
       if (response.success === true) {
         this.renderTitle(response.data.name);
+      } else {
+        console.error(err);
       }
     });
 
     Transaction.list(options, (err, response) => {
       if (response.success === true) {
-        // this.renderTransactions(); //ОШИБКА???
-      response.data.forEach(transaction => {
-        this.renderTransactions(transaction);
-      });
+        this.renderTransactions(response.data);
+      } else {
+        console.error(err);
       }
     });
   }
@@ -127,7 +137,7 @@ class TransactionsPage {
    * Устанавливает заголовок: «Название счёта»
    * */
   clear() {
-    this.renderTransactions();
+    this.renderTransactions([]);
     this.renderTitle("Название счёта");
     this.lastOptions = null;
   }
@@ -136,7 +146,7 @@ class TransactionsPage {
    * Устанавливает заголовок в элемент .content-title
    * */
   renderTitle(name){
-    const contentTitle = document.querySelector(".content-title");
+    const contentTitle = this.element.querySelector(".content-title");
     contentTitle.textContent = name;
   }
 
@@ -145,6 +155,7 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
+    console.log(date); // ПРОВЕРКА
     const currentDate = new Date(date);
     const day = currentDate.getDate();
     const monthNames = [
@@ -163,6 +174,7 @@ class TransactionsPage {
    * item - объект с информацией о транзакции
    * */
   getTransactionHTML(item){
+    console.log(item); // ПРОВЕРКА
     const dateCreated = this.formatDate(item.created_at);
     return `
       <div class="transaction transaction_${item.type} row">
@@ -193,7 +205,15 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data){
-    const transactionHTML  = this.getTransactionHTML(data);
-    document.querySelector(".content").insertAdjacentHTML("beforebegin", transactionHTML);
+    console.log(data); // ПРОВЕРКА
+    // const transactionHTML  = this.getTransactionHTML(data);
+    // document.querySelector(".content").insertAdjacentHTML("beforebegin", transactionHTML);
+    const content = this.element.querySelector(".content");
+    content.innerHTML = '';
+    if (data && Array.isArray(data)) {
+      data.forEach(item => {
+        content.insertAdjacentHTML('beforeend', this.getTransactionHTML(item));
+      });
+    }
   }
 }
