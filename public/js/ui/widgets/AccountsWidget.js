@@ -41,12 +41,6 @@ class AccountsWidget {
       App.getModal("newAccount");
     });
 
-    // const account = this.element.querySelectorAll(".account");
-    // account.forEach((openedAccount) => {
-    //   openedAccount.addEventListener("click", () => {
-    //     this.onSelectAccount(openedAccount);
-    //   });
-    // });
     this.element.addEventListener("click", (event) => {
       const accountElement = event.target.closest(".account");
       if (accountElement) {
@@ -101,7 +95,7 @@ class AccountsWidget {
   onSelectAccount( element ) {
     const activeAccount = this.element.querySelector(".account.active");
     if (activeAccount) {
-    activeAccount.classList.remove("active");
+      activeAccount.classList.remove("active");
     }
 
     element.classList.add("active");

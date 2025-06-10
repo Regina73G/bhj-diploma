@@ -22,15 +22,16 @@ const createRequest = (options = {}) => {
   }
 
   let urlFull = url;
-  xhr.open(method, urlFull);
 
   if (method === "GET" && data) {
-    const queryString = "?" + Object.entries(data)
+    const queryString = Object.entries(data)
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
 
-    urlFull += queryString;
+    urlFull += (urlFull.includes('?') ? '&' : '?') + queryString;
   }
+
+  xhr.open(method, urlFull);
 
   if (method !== 'GET' && data) {
     const formData = new FormData();
