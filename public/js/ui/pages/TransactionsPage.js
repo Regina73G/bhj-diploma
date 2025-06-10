@@ -16,7 +16,7 @@ class TransactionsPage {
     }
 
     this.element = element;
-    this.lastOptions = null;
+    // this.lastOptions = null;
     this.registerEvents();
   }
 
@@ -90,7 +90,6 @@ class TransactionsPage {
     if (!confirmation) {
       return
     }
-    console.log(id); // ПРОВЕРКА
 
     Transaction.remove({id: id}, (err, response) => {
       if (response.success === true) {
@@ -155,18 +154,13 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
-    console.log(date); // ПРОВЕРКА
-    const currentDate = new Date(date);
-    const day = currentDate.getDate();
-    const monthNames = [
-      "января", "февраля", "марта", "апреля", "мая", "июня",
-      "июля", "августа", "сентября", "октября", "ноября", "декабря"
-    ];
-    const month = monthNames[currentDate.getMonth()];
-    const year = currentDate.getFullYear();
-    const hours = String(currentDate.getHours()).padStart(2, '0');
-    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-    return `${day} ${month} ${year} г. в ${hours}:${minutes}`;
+    const fullDate = new Date(date);
+    const options = { dateStyle: "long", timeStyle: "short" };
+    const formatedDate = new Intl.DateTimeFormat("ru-RU", options).format(
+      fullDate
+    );
+
+    return formatedDate.split(",").join(" в ");
   }
 
   /**
@@ -174,7 +168,6 @@ class TransactionsPage {
    * item - объект с информацией о транзакции
    * */
   getTransactionHTML(item){
-    console.log(item); // ПРОВЕРКА
     const dateCreated = this.formatDate(item.created_at);
     return `
       <div class="transaction transaction_${item.type} row">
@@ -205,14 +198,12 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data){
-    console.log(data); // ПРОВЕРКА
-    // const transactionHTML  = this.getTransactionHTML(data);
-    // document.querySelector(".content").insertAdjacentHTML("beforebegin", transactionHTML);
     const content = this.element.querySelector(".content");
     content.innerHTML = '';
-    if (data && Array.isArray(data)) {
+    if (data) {
       data.forEach(item => {
-        content.insertAdjacentHTML('beforeend', this.getTransactionHTML(item));
+        const transactionHTML  = this.getTransactionHTML(item);
+        content.insertAdjacentHTML("beforeend", transactionHTML);
       });
     }
   }
